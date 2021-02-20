@@ -9,120 +9,150 @@ package ru.netology.smarthome;
  * volUp() & volDn(), sets volume Up/Down, returns int stationVolume.
  * <p>
  * *********************************************************************************
- * All setters are PRIVATE, not included into API, use _tested_ PUBLIC methods only!
+ * All setters are PRIVATE, not included into API. Use _tested_ PUBLIC methods only!
  * *********************************************************************************
  */
 
 
 public class Radio {
 
-	private static final int FIRST_STATION = 0;
-	private static final int LAST_STATION = 9;
-	private static final int MIN_VOLUME = 0;
-	private static final int MAX_VOLUME = 10;
+    static final int FIRST_STATION = 0;
+    static final int DEFAULT_STATIONS_NUMBER = 10;
+    static final int MIN_VOLUME = 0;
+    static final int MAX_VOLUME = 100;
 
-	private int stationNumber;
-	private int stationVolume;
+    private final int LAST_STATION;
 
-	/**
-	 * Next int.
-	 *
-	 * @return the int
-	 */
-	public int next() {
-		int num = getStationNumber();
-		if (num == LAST_STATION) {
-			num = FIRST_STATION;
-		} else {
-			++num;
-		}
-		return tune(num);
-	}
+    private int stationNumber;
+    private int stationVolume;
 
-	/**
-	 * Prev int.
-	 *
-	 * @return the int
-	 */
-	public int prev() {
-		int num = getStationNumber();
-		if (num == FIRST_STATION) {
-			num = LAST_STATION;
-		} else {
-			--num;
-		}
-		return tune(num);
-	}
+    /**
+     * Instantiates a new Radio.
+     *
+     * @param maxStations max number of stations
+     */
+    public Radio(int maxStations) {
+        if (maxStations < 1) {
+            LAST_STATION = DEFAULT_STATIONS_NUMBER;
+        } else {
+            LAST_STATION = maxStations;
+        }
+    }
 
-	/**
-	 * Tune int.
-	 *
-	 * @param stationNumber the station number
-	 * @return the int
-	 */
-	public int tune(int stationNumber) {
-		setStationNumber(stationNumber);
-		return getStationNumber();
-	}
+    /**
+     * Instantiates a new Radio with DEFAULT_STATIONS_NUMBER.
+     */
+    public Radio() {
+        LAST_STATION = DEFAULT_STATIONS_NUMBER;
+    }
 
-	private void setStationNumber(int stationNumber) {
-		if (stationNumber < FIRST_STATION || stationNumber > LAST_STATION) {
-			return;
-		}
-		this.stationNumber = stationNumber;
-	}
+    /**
+     * Gets last station.
+     *
+     * @return the last station
+     */
+    public final int getLAST_STATION() {
+        return LAST_STATION;
+    }
 
-	/**
-	 * Gets station number.
-	 *
-	 * @return the station number
-	 */
-	public int getStationNumber() {
-		return stationNumber;
-	}
+    /**
+     * Next int.
+     *
+     * @return the int
+     */
+    public int next() {
+        int num = getStationNumber();
+        if (num == LAST_STATION) {
+            num = FIRST_STATION;
+        } else {
+            ++num;
+        }
+        return tune(num);
+    }
 
-	/**
-	 * Vol up int.
-	 *
-	 * @return the int
-	 */
-	public int volUp() {
-		int vol = getStationVolume();
-		if (vol < MAX_VOLUME) {
-			vol = volume(vol + 1);
-		}
-		return vol;
-	}
+    /**
+     * Prev int.
+     *
+     * @return the int
+     */
+    public int prev() {
+        int num = getStationNumber();
+        if (num == FIRST_STATION) {
+            num = LAST_STATION;
+        } else {
+            --num;
+        }
+        return tune(num);
+    }
 
-	/**
-	 * Vol dn int.
-	 *
-	 * @return the int
-	 */
-	public int volDn() {
-		int vol = getStationVolume();
-		if (vol > MIN_VOLUME) {
-			vol = volume(vol - 1);
-		}
-		return vol;
-	}
+    /**
+     * Tune int.
+     *
+     * @param stationNumber the station number
+     * @return the int
+     */
+    public int tune(int stationNumber) {
+        setStationNumber(stationNumber);
+        return getStationNumber();
+    }
 
-	/**
-	 * Volume int.
-	 *
-	 * @param vol the vol
-	 * @return the int
-	 */
-	int volume(int vol) {
-		setStationVolume(vol);
-		return getStationVolume();
-	}
+    /**
+     * Gets station number.
+     *
+     * @return the station number
+     */
+    public int getStationNumber() {
+        return stationNumber;
+    }
 
-	private void setStationVolume(int stationVolume) {
-		this.stationVolume = stationVolume;
-	}
+    private void setStationNumber(int stationNumber) {
+        if (stationNumber < FIRST_STATION || stationNumber > LAST_STATION) {
+            return;
+        }
+        this.stationNumber = stationNumber;
+    }
 
-	public int getStationVolume() {
-		return stationVolume;
-	}
+    /**
+     * Vol up int.
+     *
+     * @return the int
+     */
+    public int volUp() {
+        int vol = getStationVolume();
+        if (vol < MAX_VOLUME) {
+            vol = volume(vol + 1);
+        }
+        return vol;
+    }
+
+    /**
+     * Vol dn int.
+     *
+     * @return the int
+     */
+    public int volDn() {
+        int vol = getStationVolume();
+        if (vol > MIN_VOLUME) {
+            vol = volume(vol - 1);
+        }
+        return vol;
+    }
+
+    int volume(int vol) {
+        setStationVolume(vol);
+        return getStationVolume();
+    }
+
+    private void setStationVolume(int stationVolume) {
+        this.stationVolume = stationVolume;
+    }
+
+    /**
+     * Gets station volume.
+     *
+     * @return the station volume
+     */
+    public int getStationVolume() {
+        return stationVolume;
+    }
 }
