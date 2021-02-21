@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.netology</groupId>
@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <jacoco.percentage.instruction>100%</jacoco.percentage.instruction>
+        <projectLombok.version>1.18.12</projectLombok.version>
     </properties>
 
     <dependencies>
@@ -23,7 +24,13 @@
             <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${projectLombok.version}</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
@@ -48,7 +55,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
+                        <id>jacoco-report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
@@ -62,7 +69,6 @@
                         <configuration>
                             <rules>
                                 <rule>
-<!--                                    <element>PACKAGE</element>-->
                                     <limits>
                                         <limit>
                                             <counter>BRANCH</counter>

@@ -1,5 +1,8 @@
 package ru.netology.smarthome;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The type Radio, implements the following public methods only:
  * <p>
@@ -13,7 +16,6 @@ package ru.netology.smarthome;
  * *********************************************************************************
  */
 
-
 public class Radio {
 
     static final int FIRST_STATION = 0;
@@ -21,9 +23,12 @@ public class Radio {
     static final int MIN_VOLUME = 0;
     static final int MAX_VOLUME = 100;
 
+    @Getter
     private final int LAST_STATION;
 
+    @Getter
     private int stationNumber;
+    @Getter @Setter
     private int stationVolume;
 
     /**
@@ -44,15 +49,6 @@ public class Radio {
      */
     public Radio() {
         LAST_STATION = DEFAULT_STATIONS_NUMBER;
-    }
-
-    /**
-     * Gets last station.
-     *
-     * @return the last station
-     */
-    public final int getLAST_STATION() {
-        return LAST_STATION;
     }
 
     /**
@@ -96,15 +92,6 @@ public class Radio {
         return getStationNumber();
     }
 
-    /**
-     * Gets station number.
-     *
-     * @return the station number
-     */
-    public int getStationNumber() {
-        return stationNumber;
-    }
-
     private void setStationNumber(int stationNumber) {
         if (stationNumber < FIRST_STATION || stationNumber > LAST_STATION) {
             return;
@@ -138,21 +125,11 @@ public class Radio {
         return vol;
     }
 
+    /**
+     * Do not use this undocumented method, ever -- for accompanying test class only!
+     */
     int volume(int vol) {
         setStationVolume(vol);
         return getStationVolume();
-    }
-
-    private void setStationVolume(int stationVolume) {
-        this.stationVolume = stationVolume;
-    }
-
-    /**
-     * Gets station volume.
-     *
-     * @return the station volume
-     */
-    public int getStationVolume() {
-        return stationVolume;
     }
 }
