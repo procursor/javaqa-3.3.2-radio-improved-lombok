@@ -16,7 +16,7 @@ class RadioTest {
     /*
         The constructor Radio(int) basic sanity check. Also covers 'int' type overflow case.
         Constructor should create a new object with default number of stations if parameter
-        is incorrect. That is, if number of stations less than one.
+        is incorrect. That is, if the number of stations less than one.
     */
     @Test
     void shouldNotModifyIfBelowMin() {
